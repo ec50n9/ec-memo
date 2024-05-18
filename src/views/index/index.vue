@@ -6,7 +6,7 @@ const appStore = useAppStore();
 
 <template>
   <div class="index">
-    <h1>Welcome to EC Memo</h1>
+    <h1 data-tauri-drag-region class="bg-blue-100">Welcome to EC Memo</h1>
     <p>clicked {{ appStore.count }} times.</p>
     <button @click="appStore.increment">Click me</button>
   </div>
