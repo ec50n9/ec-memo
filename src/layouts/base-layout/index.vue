@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useAppStore } from "@/store/app";
+import { getCurrent } from "@tauri-apps/api/window";
 import {
   Maximize as MaximizeIcon,
   Minimize as MinimizeIcon,
@@ -7,27 +9,22 @@ import {
   PinnedOff as PinOffIcon,
 } from "@vicons/tabler";
 
-/** 固定在屏幕顶部 */
-const alwaysOnTop = ref(false);
-/** 是否启用最小化模式 */
-const enableMiniMode = ref(false);
+const appStore = useAppStore();
 
 const windowsActions = computed(() => [
   {
-    icon: alwaysOnTop.value ? PinOffIcon : PinIcon,
-    handler: () => {
-      alwaysOnTop.value = !alwaysOnTop.value;
-    },
+    icon: appStore.alwaysOnTop ? PinOffIcon : PinIcon,
+    handler: appStore.toggleAlwaysOnTop,
   },
   {
-    icon: enableMiniMode.value ? MaximizeIcon : MinimizeIcon,
-    handler: () => {
-      enableMiniMode.value = !enableMiniMode.value;
-    },
+    icon: appStore.enableMiniMode ? MaximizeIcon : MinimizeIcon,
+    handler: appStore.toggleEnableMiniMode,
   },
   {
     icon: CloseIcon,
-    handler: () => {},
+    handler: async () => {
+      await getCurrent().close();
+    },
   },
 ]);
 </script>

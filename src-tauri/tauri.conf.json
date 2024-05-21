@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "ec-memo",
-        "width": 400,
-        "height": 647.2,
+        "width": 300,
+        "height": 485.4,
         "decorations": false
       }
     ],
